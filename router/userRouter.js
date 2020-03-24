@@ -3,7 +3,7 @@ const { updateUser, createUser, readUser, deleteUser } = require( '../controller
 
 const userRouter = express.Router();
 
-userRouter.route( '/user' )
+userRouter.route( '/user(/:id)?' )
           .post( createUser )
           .get( readUser )
           .patch( updateUser )
