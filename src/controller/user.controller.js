@@ -24,7 +24,7 @@ module.exports.getUser = async ( req, res, next ) => {
     if( user ) {
       return res.send( user );
     }
-    res.status( 404 ).send( 'Not found' );
+    res.status( 404 ).send( 'User not found' );
 
   } catch ( e ) {
     next( e );

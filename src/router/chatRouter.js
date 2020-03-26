@@ -1,9 +1,6 @@
 const express = require( 'express' );
-const { getChat } = require( '../controller/chat.controller.js' );
 const { findChatById } = require( '../middleware' );
-const { joinToChat } = require( '../controller/chat.controller.js' );
-const { createChat } = require( '../controller/chat.controller.js' );
-const { postUser, getUser, deleteUser, updateUser } = require( '../controller/user.controller.js' );
+const { joinToChat,createChat,getChat, createMessage,getMessages } = require( '../controller/chat.controller.js' );
 
 const chatRouter = express.Router();
 
@@ -16,8 +13,9 @@ chatRouter.route( '/chat/:chatId/participants' )
 
 
 
-chatRouter.route( '/chat/:chatId/message(/:messageId)' )
-          .post();
+chatRouter.route( '/chat/:chatId/message(/:messageId)?' )
+          .get(findChatById,getMessages)
+          .post(findChatById,createMessage)
 
 
 module.exports = chatRouter;
