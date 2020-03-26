@@ -16,7 +16,7 @@ module.exports.postUser = async ( req, res, next ) => {
   }
 };
 
-module.exports.getUser = async ( req, res, next ) => {
+module.exports.getUserByID = async ( req, res, next ) => {
   try {
     const user = await User.findById( req.params.id, {
       __v: false,
@@ -31,7 +31,7 @@ module.exports.getUser = async ( req, res, next ) => {
   }
 };
 
-module.exports.updateUser = async ( req, res, next ) => {
+module.exports.updateUserById = async ( req, res, next ) => {
   try {
     const { params: { id }, body } = req;
 
@@ -47,7 +47,7 @@ module.exports.updateUser = async ( req, res, next ) => {
   }
 };
 
-module.exports.deleteUser = async ( req, res, next ) => {
+module.exports.deleteUserById = async ( req, res, next ) => {
   try {
     const { params: { id } } = req;
 
@@ -60,5 +60,20 @@ module.exports.deleteUser = async ( req, res, next ) => {
 
   } catch ( e ) {
     next( e );
+  }
+};
+
+module.exports.getAllUsers = async ( req, res, next ) => {
+  try {
+    const users = await User.find( {
+      __v: false,
+    } );
+
+    if( users ) {
+      return res.status( 200 ).send( users );
+    }
+    res.status( 404 ).send( 'Users not found' );
+  } catch ( e ) {
+    res.send( e )
   }
 };
